@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/*
+ * Console輸出/入工具
+ */
 public class Conversation {
 	
 	public static String listenTrainer() throws IOException {
@@ -12,15 +15,15 @@ public class Conversation {
 		
 	}
 	
-	public static void talkToTrainer(String wantToSay) {
+	public static void talkToTrainer(Object wantToSay) {
 		
 		System.out.println(wantToSay);
 		
 	}
 	
-	public static void talkToTrainer(String...strings) {
+	public static void talkToTrainer(Object...objs) {
 		
-		for(String wantToSay : strings) {
+		for(Object wantToSay : objs) {
 			
 			System.out.println(wantToSay);
 			

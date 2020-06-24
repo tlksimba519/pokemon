@@ -2,6 +2,6 @@ package skill;
 
 public interface INormalSkill {
 	
-	double Tackle();
+	double Tackle(String pokemonName, double ability);
 
 }

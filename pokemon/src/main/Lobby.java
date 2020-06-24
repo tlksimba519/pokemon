@@ -2,6 +2,9 @@ package main;
 
 import utility.EnumConvert;
 
+/*
+ * ¤jÆUª¬ºA
+ */
 public enum Lobby implements EnumConvert {
 	
 	Battle("Battle"),
@@ -17,16 +20,24 @@ public enum Lobby implements EnumConvert {
 	
 	public static Lobby convert(String input) {
 		
-		if(input!=null) {
+		if(input != null) {
 			
 			if(input.equalsIgnoreCase(Battle.toString())) {
+				
 				return Battle;
+				
 			}
+			
 			if(input.equalsIgnoreCase(Interact.toString())) {
+				
 				return Interact;
+				
 			}
+			
 		}
+		
 		return null;
+		
 	}
 	
 }

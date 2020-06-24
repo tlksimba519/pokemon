@@ -1,15 +1,20 @@
 package main;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
+import battle.Battle;
 import choose.Doctor;
 import choose.Pokemons;
 import trainer.Trainer;
 import utility.Conversation;
-import battle.Battle;
 
+/*
+ * 主程式
+ */
 public class Adventure {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		
 		Conversation.talkToTrainer("歡迎來到寶可夢世界!");
 		Conversation.talkToTrainer("請選擇你想要的寶可夢!");
@@ -33,22 +38,27 @@ public class Adventure {
 				Conversation.talkToTrainer("別鬧了!");
 				break;
 		}
+		
 		boolean lobby = true;
 		while(lobby) {
+			
 			Conversation.talkToTrainer("大廳\n---------------");
 			Conversation.talkToTrainer("對戰");
 			Conversation.talkToTrainer("互動");
+			
 			switch(Lobby.convert(Conversation.listenTrainer())) {
 				case Battle :
 					Battle.battle(you);
 					break;
+				case Interact :
+					you.getBuddy().callName();
+					Conversation.talkToTrainer(you.getBuddy().showHp());
 				default :
 					break;
 			}
+			
 		}
 		you.getBuddy().callName();
-		
-		
 	}
 
 }

@@ -1,22 +1,16 @@
 package pokemon;
 
+import utility.Conversation;
+
 /*
  * 寶可夢抽象父類別
  */
-abstract public class Pokemon {
+abstract public class Pokemon implements IPokemon{
 	protected String name;
-	String type;
 	protected int level;
-	double exp;
-	private int[] ability;
-	private int hp;
-	private int atk;
-	private int def;
-	private int sAtk;
-	private int sDef;
-	private int spd;
-	private String[] skillList;
-	
+	protected double exp;
+	protected double hp;
+
 	
 	Pokemon(String name) {
 		
@@ -24,7 +18,7 @@ abstract public class Pokemon {
 		
 	}
 	
-	Pokemon(String name,int level) {
+	Pokemon(String name, int level) {
 		
 		this.name = name;
 		this.level = level;
@@ -32,7 +26,7 @@ abstract public class Pokemon {
 	}
 	
 	//獲得經驗值
-	void gainEXP(int gain) {
+	public void gainEXP(int gain) {
 			
 		exp += gain;
 		if(exp > level * 50) { //經驗曲線為50
@@ -43,30 +37,18 @@ abstract public class Pokemon {
 		}
 		
 	}
-	
-	//能力值更新
-	abstract void updateAbility();
 			
 	//升級
-	void levelUp() {
+	public void levelUp() {
 		
 		level++;
 		updateAbility();
 			
 	}
 	
-	//技能表更新
-	abstract void updateSkillList();
-	
 	public void setName(String name) {
 		
 		this.name = name;
-		
-	}
-	
-	String getName() {
-		
-		return name;
 		
 	}
 	
@@ -75,9 +57,26 @@ abstract public class Pokemon {
 		System.out.println(name + " here!");
 		
 	}
-	
-	public abstract String getSkills(int i);
 		
+	//能力值更新
+	abstract void updateAbility();
 	
+//	public void getHurt(double damage) {
+//		
+//		double critOrMiss = Math.random() * 100;
+//		
+//		if(critOrMiss > 68) {
+//			damage = damage * 1.5;
+//			Conversation.talkToTrainer("暴擊!!!");
+//		} else if(critOrMiss < 30) {
+//			damage = damage * 0;
+//			Conversation.talkToTrainer("攻擊被閃開了!!!");
+//		} else {
+//			
+//		}
+//		
+//		hp = hp - damage;
+//		
+//	}
 
 }

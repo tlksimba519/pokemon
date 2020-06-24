@@ -2,6 +2,6 @@ package skill;
 
 public interface IFireSkill {
 	
-	double Ember();
+	double Ember(String pokemonName, double ability);
 
 }

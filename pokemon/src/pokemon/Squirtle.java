@@ -1,28 +1,32 @@
 package pokemon;
 
-import skill.*;
+import skill.SquirtleSkill;
+import utility.Conversation;
 
 /*
- * 小火龍物件
+ * 傑尼龜物件
  */
-public class Squirtle extends Pokemon implements IWaterSkill, INormalSkill {
+public class Squirtle extends Pokemon {
 
 	final private static String name = "Squirtle";
+	private String type = "water"; //屬性
 	private int level = 5; //起始等級
 	private double exp = 0; //經驗值
-	private int[] ability = {44, 48, 65, 50, 64, 43}; //初始值 依序為 血量, 攻擊, 防禦, 特攻, 特防, 速度
-	private int hp = 44;
-	private int atk = 48;
-	private int def = 65;
-	private int sAtk = 50;
-	private int sDef = 64;
-	private int spd = 43;
-	private String[] skillList;
+	private double[] ability = {44, 48, 65, 50, 64, 43}; //初始值 依序為 血量, 攻擊, 防禦, 特攻, 特防, 速度
+	double hp = 44;
+	private double atk = 48;
+	private double def = 65;
+	private double sAtk = 50;
+	private double sDef = 64;
+	private double spd = 43;
+	SquirtleSkill SquirtleSkill;
 	
 	//建構子
 	public Squirtle() {
 		
 		super(name);
+		this.SquirtleSkill = new SquirtleSkill();
+		updateAbility();
 		
 	}
 	
@@ -30,50 +34,52 @@ public class Squirtle extends Pokemon implements IWaterSkill, INormalSkill {
 		
 		super(name);
 		this.level = level;
+		this.SquirtleSkill = new SquirtleSkill(level);
 		updateAbility();
 		
 	}
 	
 	void updateAbility() {
 		
-		hp = ability[0] + (level-5) * 6 ; //HP曲線為6
-		atk = ability[1] + (level-5) * 3 ; //攻擊曲線為3
-		def = ability[2] + (level-5) * 5 ; //防禦曲線為5
-		sAtk = ability[3] + (level-5) * 3 ; //特攻曲線為3
-		sDef = ability[4] + (level-5) * 4 ; //特防曲線為4
-		spd = ability[5] + (level-5) * 3 ; //速度曲線為3
+		hp = ability[0] + (level - 5) * 6 ; //HP曲線為6
+		atk = ability[1] + (level - 5) * 3 ; //攻擊曲線為3
+		def = ability[2] + (level - 5) * 5 ; //防禦曲線為5
+		sAtk = ability[3] + (level - 5) * 3 ; //特攻曲線為3
+		sDef = ability[4] + (level - 5) * 4 ; //特防曲線為4
+		spd = ability[5] + (level - 5) * 3 ; //速度曲線為3
 
 	}
 	
-	void updateSkillList() {
-		
-		this.skillList[0] = "Tackle";
-		this.skillList[1] = "Bubble";
-	
-	}
-	
-	public String getSkills(int i) {
-		
-		return skillList[i - 1];
-		
-	}
-	
-	/*
-	 * 持有技能
-	 */
 	@Override
-	public double Tackle() {
-		
-		System.out.println(name + "use Tackle!");
-		return ability[1] * 0.5;
-		
+	public String getSkill(int i) {
+		return (SquirtleSkill.getSkillList())[i];
+	}
+
+	@Override
+	public double useSkill(int skillNo) {
+		return SquirtleSkill.useSkill(skillNo, name, atk, sAtk);
 	}
 	
 	@Override
-	public double Bubble() {
+	public double showHp() {
+		return hp;
+	}
+	
+	public void getHurt(double damage) {
 		
-		System.out.println(name + "use Bubble!");
-		return ability[3] * 0.5;
+		double critOrMiss = Math.random() * 100;
+		
+		if(critOrMiss > 68) {
+			damage = damage * 1.5;
+			Conversation.talkToTrainer("暴擊!!!");
+		} else if(critOrMiss < 30) {
+			damage = damage * 0;
+			Conversation.talkToTrainer("攻擊被閃開了!!!");
+		} else {
+			
+		}
+		
+		hp = hp - damage;
 		
 	}
 	

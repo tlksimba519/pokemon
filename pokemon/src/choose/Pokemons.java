@@ -4,29 +4,38 @@ import utility.EnumConvert;
 
 public enum Pokemons implements EnumConvert {
 	
-	Charmander("Charmander"),
-	Squirtle("Squirtle"),
-	Bulbasaur("Bulbasaur");
+	Charmander("pokemon.Charmander"),
+	Squirtle("pokemon.Squirtle"),
+	Bulbasaur("pokemon.Bulbasaur");
 	
-	private String pokemon;
+	String pokemonClass;
 	
-	Pokemons(String pokemon) {
+	Pokemons(String pokemonClass) {
 		
-		this.pokemon = pokemon;
-		
+		this.pokemonClass = pokemonClass;
+				
 	}
 	
 	public static Pokemons convert(String input) {
-		if(input!=null) {
+		
+		if(input != null) {
+			
 			if(input.equalsIgnoreCase(Charmander.toString())) {
+				
 				return Charmander;
+			
 			}
 			if(input.equalsIgnoreCase(Squirtle.toString())) {
+				
 				return Squirtle;
+				
 			}
 			if(input.equalsIgnoreCase(Bulbasaur.toString())) {
+				
 				return Bulbasaur;
+				
 			}
+			
 		}
 		return null;
 	}

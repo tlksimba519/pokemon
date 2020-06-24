@@ -2,6 +2,6 @@ package skill;
 
 public interface IWaterSkill {
 	
-	double Bubble();
+	double Bubble(String pokemonName, double ability);
 
 }
