@@ -7,7 +7,7 @@ import trainer.Trainer;
 import utility.Conversation;
 
 public class Battle {
-	private static void fight(double damage, IPokemon defender) {
+	private static void fight(double damage, Pokemon defender) {
 		defender.getHurt(damage);
 	}
 	public static void battle(Trainer you) throws IOException {
@@ -22,8 +22,16 @@ public class Battle {
 			
 			while(round) {
 				
+				Conversation.talkToTrainer(enemy.getBuddy().showHp());
+				
+				if(enemy.getBuddy().showHp().contains("敗")) {
+					
+					round = false;
+					break;
+					
+				}
+				
 				Conversation.talkToTrainer(("第" + Integer.toString(roundCount) + "回合"));
-				Conversation.talkToTrainer(Double.toString(enemy.getBuddy().showHp()));
 				Conversation.talkToTrainer("選擇招式", "1." + you.getBuddy().getSkill(0), 
 						"2." + you.getBuddy().getSkill(1),
 						"3." + you.getBuddy().getSkill(2),

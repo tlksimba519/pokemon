@@ -1,6 +1,7 @@
 package pokemon;
 
 import skill.BulbasaurSkill;
+import utility.Conversation;
 
 /*
  * 妙蛙種子物件
@@ -24,6 +25,7 @@ public class Bulbasaur extends Pokemon {
 	public Bulbasaur(){
 		
 		super(name);
+		super.hp = hp;
 		this.BulbasaurSkill = new BulbasaurSkill();
 		updateAbility();
 		
@@ -46,27 +48,40 @@ public class Bulbasaur extends Pokemon {
 		sAtk = ability[3] + (level - 5) * 5 ; //特攻曲線為4
 		sDef = ability[4] + (level - 5) * 5 ; //特防曲線為3
 		spd = ability[5] + (level - 5) * 3 ; //速度曲線為3
+		super.hp = hp;
 
 	}
 	
-	@Override
 	public String getSkill(int i) {
 		return (BulbasaurSkill.getSkillList())[i];
 	}
 
-	@Override
 	public double useSkill(int skillNo) {
 		return BulbasaurSkill.useSkill(skillNo, name, atk, sAtk);
 	}
-	
-	@Override
-	public double showHp() {
-		return hp;
+//	
+	public String showHp() {
+		if(hp <= 0) {
+			return (name + " 被擊敗了!");
+		}
+		return Double.toString(hp);
 	}
-
-	@Override
+//
 	public void getHurt(double damage) {
-		// TODO Auto-generated method stub
+	
+		double critOrMiss = Math.random() * 100;
+		
+		if(critOrMiss > 68) {
+			damage = damage * 1.5;
+			Conversation.talkToTrainer("暴擊!!!");
+		} else if(critOrMiss < 30) {
+			damage = damage * 0;
+			Conversation.talkToTrainer("攻擊被閃開了!!!");
+		} else {
+			
+		}
+		
+		hp = hp - damage;
 		
 	}
 	

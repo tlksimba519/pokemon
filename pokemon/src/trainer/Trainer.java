@@ -1,27 +1,27 @@
 package trainer;
 
-import pokemon.IPokemon;
+import pokemon.Pokemon;
 
 /*
  * °V½m®aª«¥ó
  */
 public class Trainer {
 	
-	private IPokemon hadTrainer;
+	private Pokemon hadTrainer;
 	
-	public Trainer(IPokemon iPokemon) {
+	public Trainer(Pokemon pokemon) {
 		
-		this.setBuddy(iPokemon);
+		this.setBuddy(pokemon);
 	
 	}
 
-	public IPokemon getBuddy() {
+	public Pokemon getBuddy() {
 		return hadTrainer;
 	}
 
-	public void setBuddy(IPokemon iPokemon) {
+	public void setBuddy(Pokemon pokemon) {
 		
-		this.hadTrainer = iPokemon;
+		this.hadTrainer = pokemon;
 		
 	}
 

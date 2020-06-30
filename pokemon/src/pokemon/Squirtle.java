@@ -25,6 +25,7 @@ public class Squirtle extends Pokemon {
 	public Squirtle() {
 		
 		super(name);
+		
 		this.SquirtleSkill = new SquirtleSkill();
 		updateAbility();
 		
@@ -50,21 +51,21 @@ public class Squirtle extends Pokemon {
 
 	}
 	
-	@Override
 	public String getSkill(int i) {
 		return (SquirtleSkill.getSkillList())[i];
 	}
 
-	@Override
 	public double useSkill(int skillNo) {
 		return SquirtleSkill.useSkill(skillNo, name, atk, sAtk);
 	}
-	
-	@Override
-	public double showHp() {
-		return hp;
+//	
+	public String showHp() {
+		if(hp <= 0) {
+			return (name + " ³QÀ»±Ñ¤F!");
+		}
+		return Double.toString(hp);
 	}
-	
+//	
 	public void getHurt(double damage) {
 		
 		double critOrMiss = Math.random() * 100;

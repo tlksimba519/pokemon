@@ -1,15 +1,13 @@
 package pokemon;
 
-import utility.Conversation;
-
 /*
  * 寶可夢抽象父類別
  */
-abstract public class Pokemon implements IPokemon{
-	protected String name;
-	protected int level;
-	protected double exp;
-	protected double hp;
+abstract public class Pokemon {
+	String name;
+	int level;
+	double exp;
+	double hp;
 
 	
 	Pokemon(String name) {
@@ -78,5 +76,12 @@ abstract public class Pokemon implements IPokemon{
 //		hp = hp - damage;
 //		
 //	}
+	public abstract void getHurt(double damage);
+	public abstract String showHp();
+	
+	public abstract String getSkill(int i);
+	public abstract double useSkill(int skillNo);
+
+
 
 }

@@ -1,6 +1,7 @@
 package pokemon;
 
 import skill.CharmanderSkill;
+import utility.Conversation;
 
 /*
  * 小火龍物件
@@ -24,6 +25,7 @@ public class Charmander extends Pokemon {
 	public Charmander() {
 		
 		super(name);
+		
 		this.CharmanderSkill = new CharmanderSkill();
 		updateAbility();
 		
@@ -49,24 +51,36 @@ public class Charmander extends Pokemon {
 
 	}
 
-	@Override
 	public String getSkill(int i) {
 		return (CharmanderSkill.getSkillList())[i];
 	}
 
-	@Override
 	public double useSkill(int skillNo) {
 		return CharmanderSkill.useSkill(skillNo, name, atk, sAtk);
 	}
-	
-	@Override
-	public double showHp() {
-		return hp;
+//	
+	public String showHp() {
+		if(hp <= 0) {
+			return (name + " 被擊敗了!");
+		}
+		return Double.toString(hp);
 	}
-
-	@Override
+//
 	public void getHurt(double damage) {
-		// TODO Auto-generated method stub
+		
+		double critOrMiss = Math.random() * 100;
+		
+		if(critOrMiss > 68) {
+			damage = damage * 1.5;
+			Conversation.talkToTrainer("暴擊!!!");
+		} else if(critOrMiss < 30) {
+			damage = damage * 0;
+			Conversation.talkToTrainer("攻擊被閃開了!!!");
+		} else {
+			
+		}
+		
+		hp = hp - damage;
 		
 	}
 
